@@ -77,13 +77,16 @@
 <script src="flutter_bootstrap.js" async></script>
 
 <script>
-  // زمانی که صفحه کاملاً لود شد، صفحه لودینگ را حذف می‌کنیم
-  window.addEventListener('load', function() {
-    const loadingScreen = document.getElementById('loading-screen');
-    loadingScreen.style.transition = 'opacity 0.5s ease'; // افکت محو شدن
-    loadingScreen.style.opacity = '0';
-    setTimeout(() => loadingScreen.remove(), 500); // حذف کردن پس از محو شدن
-  });
+  // بررسی کامل لود شدن صفحه
+  document.onreadystatechange = function () {
+    if (document.readyState === 'complete') {
+      // زمانی که صفحه کامل لود شد، لودینگ را حذف کنید
+      const loadingScreen = document.getElementById('loading-screen');
+      loadingScreen.style.transition = 'opacity 0.5s ease'; // افکت محو شدن
+      loadingScreen.style.opacity = '0';
+      setTimeout(() => loadingScreen.remove(), 500); // حذف کردن پس از محو شدن
+    }
+  };
 </script>
 </body>
 </html>
