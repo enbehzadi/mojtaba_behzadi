@@ -1,24 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="https://enbehzadi.github.io/mojtaba_behzadi/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="it  is my website">
+  <meta name="description" content="it is my website">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,8 +18,72 @@
 
   <title>MojtabaBehzadi</title>
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    /* سبک اصلی لودینگ */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0d1117;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      overflow: hidden;
+    }
+
+    /* انیمیشن دایره‌ای */
+    .spinner {
+      width: 100px;
+      height: 100px;
+      border: 10px solid rgba(255, 255, 255, 0.2);
+      border-top: 10px solid #ffffff;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* متن زیر دایره */
+    #loading-text {
+      margin-top: 20px;
+      font-size: 18px;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+<!-- صفحه لودینگ -->
+<div id="loading-screen">
+  <div>
+    <div class="spinner"></div>
+    <div id="loading-text">Loading, please wait...</div>
+  </div>
+</div>
+
+<!-- محتوای اصلی -->
+<script src="flutter_bootstrap.js" async></script>
+
+<script>
+  // زمانی که صفحه کاملاً لود شد، صفحه لودینگ را حذف می‌کنیم
+  window.addEventListener('load', function() {
+    const loadingScreen = document.getElementById('loading-screen');
+    loadingScreen.style.transition = 'opacity 0.5s ease'; // افکت محو شدن
+    loadingScreen.style.opacity = '0';
+    setTimeout(() => loadingScreen.remove(), 500); // حذف کردن پس از محو شدن
+  });
+</script>
 </body>
 </html>
